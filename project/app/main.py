@@ -17,9 +17,9 @@ def on_startup():
     init_db()
 
 
-@app.post("/pdfkgpkf")
+@app.post("/start_collectind_statistics")
 async def start_collecting_stat(session: Session = Depends(get_session)):
-    for i in range(5):
+    while True:
         result = session.execute(select(Req))
         ids = result.scalars().all()
         for id_req in ids:
@@ -28,7 +28,7 @@ async def start_collecting_stat(session: Session = Depends(get_session)):
             session.add(st)
             session.commit()
             session.refresh(st)
-        await asyncio.sleep(5)
+        await asyncio.sleep(3600)
 
 
 @app.post("/add")
@@ -61,7 +61,7 @@ def get_stat(from_date: DateTime, to_date: DateTime, id_req: int = Body(...), se
             st in stats]
 
 
-
+'''
 @app.post("/show_stat")
 def show_stat(session: Session = Depends(get_session)):
     result = session.execute(select(Stat))
@@ -75,4 +75,4 @@ def show_req(session: Session = Depends(get_session)):
     result = session.execute(select(Req))
     stats = result.scalars().all()
     return stats
-
+'''
