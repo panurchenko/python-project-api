@@ -4,9 +4,9 @@ from sqlmodel import Session
 import asyncio
 
 
-from db import get_session, init_db
-from models import Req, ReqCreate, Stat, StatCreate, DateTime
-from parsing import get_amount
+from app.db import get_session, init_db
+from app.models import Req, ReqCreate, Stat, StatCreate, DateTime
+from app.parsing import get_amount
 from datetime import datetime
 
 app = FastAPI()
